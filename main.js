@@ -15,24 +15,28 @@ async function file_picker() {
         const content = await file.text();
         console.log(content);
     } catch (error) {
-        console.log("Error");
+        alert(error);
     }
 }
 
 async function saveChange() {
-    const [fileHandle] = await showOpenFilePicker({
-        types: [
-            {
-                description: "Text files",
-                accept: {
-                    'text/plain' : ['.txt', '.text'],
-                    'application/json' : ['.json']
+    try {
+        const [fileHandle] = await showOpenFilePicker({
+            types: [
+                {
+                    description: "Text files",
+                    accept: {
+                        'text/plain' : ['.txt', '.text'],
+                        'application/json' : ['.json']
+                    }
                 }
-            }
-        ]
-    });
-
-    let writable = await fileHandle.createWritable();
-    await writable.write("Whats up broo");
-    await writable.close();
+            ]
+        });
+    
+        let writable = await fileHandle.createWritable();
+        await writable.write("Whats up broo");
+        await writable.close();   
+    } catch (error) {
+        alert(error);
+    }
 }
