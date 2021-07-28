@@ -19,22 +19,20 @@ async function file_picker() {
     }
 }
 
-async function saveChange(fileHandle) {
-    if(!fileHandle){
-        fileHandle = await showOpenFilePicker({
-            types: [
-                {
-                    description: "Text files",
-                    accept: {
-                        'text/plain' : ['.txt', '.text'],
-                        'application/json' : ['.json']
-                    }
+async function saveChange() {
+    const [fileHandle] = await showOpenFilePicker({
+        types: [
+            {
+                description: "Text files",
+                accept: {
+                    'text/plain' : ['.txt', '.text'],
+                    'application/json' : ['.json']
                 }
-            ]
-        });
-    }
+            }
+        ]
+    });
 
-    const writable = await fileHandle.createWritable();
-    await writable.write("Hello there");
+    let writable = await fileHandle.createWritable();
+    await writable.write("Whats up broo");
     await writable.close();
 }
